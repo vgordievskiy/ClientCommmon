@@ -1,0 +1,21 @@
+name: SemplexClientCmn
+version: 0.0.1
+dependencies:
+  browser: any
+  cork:
+    git: https://github.com/vgordievskiy/cork.git
+  harvest:
+    git: https://github.com/vgordievskiy/harvest.git
+  event_bus: any
+  observe: any
+  crypto: "^0.9.1"
+dev_dependencies:
+  unittest: any
+transformers:
+- $dart2js:
+    commandLineOptions:
+    - --enable-experimental-mirrors
+    - --disallow-unsafe-eval
+    checked: false
+    minify: true
+    sourceMaps: false

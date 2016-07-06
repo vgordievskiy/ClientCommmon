@@ -1,0 +1,4 @@
+build/
+pubspec.lock
+.pub
+packages/
