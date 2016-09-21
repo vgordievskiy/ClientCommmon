@@ -8,7 +8,7 @@ dependencies:
     git: https://github.com/vgordievskiy/harvest.git
   event_bus: any
   observe: any
-  crypto: "^0.9.1"
+  crypto: any
 dev_dependencies:
   unittest: any
 transformers:
