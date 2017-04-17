@@ -81,7 +81,7 @@ class HttpCommunicator implements ICommunicator {
           reqData = request.Blob;
           request.Headers.remove('Content-type');
         } else {
-          reqData = _encoder(request.Args);
+          reqData = _encoder(request.Args, request: request);
         }
 
         Completer<HttpResponseAdapter>
