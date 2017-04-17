@@ -10,12 +10,15 @@ import 'dart:html';
 import 'dart:convert';
 
 typedef void IntRequest(HttpRequestAdapter);
+typedef String TEncoder(Map<String, dynamic> data, {HttpRequestAdapter request});
 
 class HttpCommunicator implements ICommunicator {
   Map<RequestType, IntRequest> _TypeAdapters;
   Map<String, String> _DefaultHeaders;
+  TEncoder _encoder;
 
   HttpCommunicator() {
+    _encoder =_encodeToFormData;
     _DefaultHeaders = new Map();
     _TypeAdapters = new Map();
     _TypeAdapters[RequestType.POST] = _sendPostRequest;
@@ -26,7 +29,11 @@ class HttpCommunicator implements ICommunicator {
 
   Map<RequestType, IntRequest> get ReqAdapter => _TypeAdapters;
 
-  String _encodeToFormData(Map<String, dynamic> data)
+  setEncoder(TEncoder encoder) {
+    _encoder = encoder;
+  }
+
+  String _encodeToFormData(Map<String, dynamic> data, {HttpRequestAdapter request})
   {
     var parts = [];
     data.forEach((key, value) {
@@ -74,7 +81,7 @@ class HttpCommunicator implements ICommunicator {
           reqData = request.Blob;
           request.Headers.remove('Content-type');
         } else {
-          reqData = _encodeToFormData(request.Args);
+          reqData = _encoder(request.Args);
         }
 
         Completer<HttpResponseAdapter>
