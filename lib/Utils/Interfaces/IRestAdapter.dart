@@ -8,7 +8,6 @@ import 'package:cork/cork.dart';
 
 import 'ICommunicator.dart';
 
-@Inject()
 abstract class IRestAdapter {
   ICommunicator GetCommunicator();
   Future<dynamic> Get(String url, {bool credentials : true });
